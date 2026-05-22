@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SCARLUX STREET — Urban Clothing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red: #E8001C;
+      --red-dark: #B0001A;
+      --black: #0A0A0A;
+      --dark: #111111;
+      --gray: #1A1A1A;
+      --gray-mid: #2C2C2C;
+      --gray-light: #6B6B6B;
+      --white: #F5F5F5;
+      --cream: #EDE8E0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 5vw;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      transition: padding .3s;
+    }
+
+    nav.scrolled { padding: .8rem 5vw; }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.9rem;
+      letter-spacing: .1em;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--red); }
+
+    .nav-links {
+      display: flex;
+      gap: 2.4rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--gray-light);
+      text-decoration: none;
+      font-size: .8rem;
+      font-weight: 500;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-cta {
+      background: var(--red);
+      color: var(--white) !important;
+      padding: .5rem 1.2rem;
+      border-radius: 2px;
+      font-weight: 600 !important;
+      transition: background .2s !important;
+    }
+
+    .nav-cta:hover { background: var(--red-dark) !important; color: var(--white) !important; }
+
+    .nav-burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav-burger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      transition: all .3s;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 0 5vw;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #0A0A0A 0%, #1a0005 50%, #0A0A0A 100%);
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(232,0,28,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(232,0,28,.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .hero-noise {
+      position: absolute;
+      inset: 0;
+      opacity: .025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(232,0,28,.12);
+      border: 1px solid rgba(232,0,28,.3);
+      color: var(--red);
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      padding: .35rem .9rem;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--red);
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .5; transform: scale(1.3); }
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 12vw, 9rem);
+      line-height: .92;
+      letter-spacing: .02em;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title .line-red { color: var(--red); display: block; }
+
+    .hero-subtitle {
+      font-size: clamp(.95rem, 2vw, 1.15rem);
+      color: var(--gray-light);
+      line-height: 1.7;
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--red);
+      color: var(--white);
+      text-decoration: none;
+      padding: .9rem 2.2rem;
+      font-size: .85rem;
+      font-weight: 600;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: background .2s, transform .2s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover { background: var(--red-dark); transform: translateY(-2px); }
+
+    .btn-ghost {
+      border: 1px solid rgba(255,255,255,.2);
+      color: var(--white);
+      text-decoration: none;
+      padding: .9rem 2.2rem;
+      font-size: .85rem;
+      font-weight: 500;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: border-color .2s, transform .2s;
+      display: inline-block;
+    }
+
+    .btn-ghost:hover { border-color: rgba(255,255,255,.6); transform: translateY(-2px); }
+
+    .hero-stats {
+      position: absolute;
+      right: 5vw;
+      bottom: 8vh;
+      display: flex;
+      gap: 3rem;
+      z-index: 2;
+    }
+
+    .stat { text-align: center; }
+
+    .stat-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.8rem;
+      line-height: 1;
+      color: var(--white);
+    }
+
+    .stat-number span { color: var(--red); }
+
+    .stat-label {
+      font-size: .65rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gray-light);
+      margin-top: .3rem;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 5vw;
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      z-index: 2;
+    }
+
+    .scroll-line {
+      width: 40px;
+      height: 1px;
+      background: var(--gray-light);
+    }
+
+    .scroll-text {
+      font-size: .65rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--gray-light);
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap {
+      background: var(--red);
+      padding: .7rem 0;
+      overflow: hidden;
+      display: flex;
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 2rem;
+      animation: marquee 22s linear infinite;
+      white-space: nowrap;
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      letter-spacing: .2em;
+      color: var(--white);
+      flex-shrink: 0;
+    }
+
+    .marquee-dot {
+      width: 5px; height: 5px;
+      background: rgba(255,255,255,.5);
+      border-radius: 50%;
+    }
+
+    /* ── SECTIONS GENERAL ── */
+    section { padding: 6rem 5vw; }
+
+    .section-label {
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: .8rem;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      letter-spacing: .04em;
+      line-height: 1;
+      margin-bottom: 1.2rem;
+    }
+
+    .section-desc {
+      color: var(--gray-light);
+      font-size: .95rem;
+      line-height: 1.7;
+      max-width: 520px;
+    }
+
+    /* ── COLECCIONES ── */
+    #colecciones { background: var(--dark); }
+
+    .collections-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3rem;
+    }
+
+    .collections-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+    }
+
+    .collection-card {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 3/4;
+      cursor: pointer;
+    }
+
+    .collection-card:first-child {
+      grid-row: span 2;
+      aspect-ratio: auto;
+    }
+
+    .card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .6s cubic-bezier(.25,.46,.45,.94);
+    }
+
+    .collection-card:hover .card-img { transform: scale(1.06); }
+
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.85) 0%, transparent 50%);
+      transition: background .3s;
+    }
+
+    .collection-card:hover .card-overlay {
+      background: linear-gradient(to top, rgba(0,0,0,.9) 0%, rgba(232,0,28,.1) 100%);
+    }
+
+    .card-info {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 1.5rem 1.2rem;
+    }
+
+    .card-tag {
+      font-size: .6rem;
+      font-weight: 600;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--red);
+      background: rgba(232,0,28,.15);
+      border: 1px solid rgba(232,0,28,.3);
+      padding: .2rem .6rem;
+      border-radius: 2px;
+      display: inline-block;
+      margin-bottom: .5rem;
+    }
+
+    .card-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: .06em;
+    }
+
+    .card-price {
+      color: var(--gray-light);
+      font-size: .8rem;
+      margin-top: .2rem;
+    }
+
+    /* placeholder cards usando gradientes */
+    .card-placeholder {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      inset: 0;
+    }
+
+    .p1 { background: linear-gradient(145deg, #1a0a0a, #3d0010, #1a0a0a); }
+    .p2 { background: linear-gradient(145deg, #0a0a1a, #0d1a3d, #0a0a1a); }
+    .p3 { background: linear-gradient(145deg, #0a1a0a, #0d3d1a, #0a1a0a); }
+    .p4 { background: linear-gradient(145deg, #1a1a0a, #3d3d0d, #1a1a0a); }
+    .p5 { background: linear-gradient(145deg, #1a0a1a, #3d0d3d, #1a0a1a); }
+
+    .placeholder-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+    }
+
+    .placeholder-icon {
+      font-size: 3rem;
+      opacity: .3;
+    }
+
+    .placeholder-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      opacity: .2;
+      letter-spacing: .2em;
+    }
+
+    /* ── DROPS ── */
+    #drops { background: var(--black); }
+
+    .drops-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .drop-card {
+      background: var(--gray);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: border-color .3s, transform .3s;
+      cursor: pointer;
+    }
+
+    .drop-card:hover {
+      border-color: rgba(232,0,28,.3);
+      transform: translateY(-4px);
+    }
+
+    .drop-img {
+      aspect-ratio: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .drop-badge {
+      position: absolute;
+      top: .8rem; left: .8rem;
+      background: var(--red);
+      color: var(--white);
+      font-size: .6rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      padding: .25rem .6rem;
+      border-radius: 2px;
+      z-index: 2;
+    }
+
+    .drop-badge.sold { background: var(--gray-mid); }
+    .drop-badge.limited { background: #1a1a00; border: 1px solid #FFD700; color: #FFD700; }
+
+    .drop-info {
+      padding: 1rem 1.2rem 1.2rem;
+    }
+
+    .drop-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: .25rem;
+    }
+
+    .drop-category {
+      font-size: .7rem;
+      color: var(--gray-light);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: .8rem;
+    }
+
+    .drop-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .drop-price {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .drop-sizes {
+      display: flex;
+      gap: .3rem;
+    }
+
+    .size-chip {
+      font-size: .6rem;
+      font-weight: 600;
+      border: 1px solid rgba(255,255,255,.15);
+      padding: .15rem .4rem;
+      border-radius: 2px;
+      color: var(--gray-light);
+    }
+
+    /* ── ABOUT ── */
+    #nosotros {
+      background: var(--dark);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6vw;
+      align-items: center;
+    }
+
+    .about-visual {
+      position: relative;
+    }
+
+    .about-main-img {
+      width: 100%;
+      aspect-ratio: 4/5;
+      background: linear-gradient(145deg, #1a0005, #3d0010, #0a0a0a);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-accent {
+      position: absolute;
+      bottom: -1rem; right: -1rem;
+      width: 55%;
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, #E8001C, #B0001A);
+      border-radius: 4px;
+      z-index: -1;
+    }
+
+    .about-tag {
+      position: absolute;
+      top: 1.5rem; right: -1.5rem;
+      background: var(--black);
+      border: 1px solid rgba(255,255,255,.08);
+      padding: .8rem 1.2rem;
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    .about-tag-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: var(--red);
+    }
+
+    .about-tag-txt {
+      font-size: .65rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--gray-light);
+    }
+
+    .about-text .section-title { margin-bottom: .8rem; }
+
+    .about-values {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .value-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .value-icon {
+      width: 36px; height: 36px;
+      background: rgba(232,0,28,.1);
+      border: 1px solid rgba(232,0,28,.2);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1rem;
+    }
+
+    .value-title {
+      font-weight: 600;
+      font-size: .9rem;
+      margin-bottom: .2rem;
+    }
+
+    .value-desc {
+      font-size: .8rem;
+      color: var(--gray-light);
+      line-height: 1.6;
+    }
+
+    /* ── INSTAGRAM ── */
+    #instagram { background: var(--black); text-align: center; }
+
+    .ig-header { margin-bottom: 2.5rem; }
+
+    .ig-handle {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: 1rem;
+      color: var(--gray-light);
+      text-decoration: none;
+      margin-top: .5rem;
+      transition: color .2s;
+    }
+
+    .ig-handle:hover { color: var(--white); }
+
+    .ig-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 3px;
+      margin-bottom: 2.5rem;
+    }
+
+    .ig-post {
+      aspect-ratio: 1;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .ig-placeholder {
+      width: 100%;
+      height: 100%;
+    }
+
+    .ig-hover {
+      position: absolute;
+      inset: 0;
+      background: rgba(232,0,28,.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity .25s;
+      font-size: 1.4rem;
+    }
+
+    .ig-post:hover .ig-hover { opacity: 1; }
+
+    .ig-colors {
+      background: linear-gradient(135deg, #1a0a0a, #2d0810, #0a0a1a);
+      background-size: cover;
+    }
+
+    .ig1 { background: linear-gradient(135deg, #2d0810, #1a0010); }
+    .ig2 { background: linear-gradient(135deg, #0a0a20, #1a1040); }
+    .ig3 { background: linear-gradient(135deg, #1a1a1a, #2d2d2d); }
+    .ig4 { background: linear-gradient(135deg, #200a0a, #401010); }
+    .ig5 { background: linear-gradient(135deg, #0a1a0a, #102d10); }
+    .ig6 { background: linear-gradient(135deg, #1a0a20, #2d1040); }
+
+    /* ── NEWSLETTER ── */
+    #newsletter {
+      background: linear-gradient(135deg, #1a0005 0%, #0A0A0A 50%, #1a0005 100%);
+      text-align: center;
+      padding: 5rem 5vw;
+    }
+
+    .newsletter-inner { max-width: 560px; margin: 0 auto; }
+
+    .newsletter-inner .section-title {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      margin-bottom: .8rem;
+    }
+
+    .newsletter-inner .section-desc {
+      max-width: 100%;
+      margin: 0 auto 2rem;
+      text-align: center;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: .5rem;
+    }
+
+    .newsletter-input {
+      flex: 1;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.12);
+      color: var(--white);
+      padding: .9rem 1.2rem;
+      font-size: .85rem;
+      border-radius: 2px;
+      outline: none;
+      transition: border-color .2s;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .newsletter-input::placeholder { color: var(--gray-light); }
+
+    .newsletter-input:focus { border-color: var(--red); }
+
+    .newsletter-input:focus + .btn-primary { background: var(--red-dark); }
+
+    .newsletter-note {
+      font-size: .7rem;
+      color: var(--gray-light);
+      margin-top: .8rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      border-top: 1px solid rgba(255,255,255,.06);
+      padding: 3rem 5vw 2rem;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand .nav-logo { font-size: 2rem; display: inline-block; margin-bottom: .8rem; }
+
+    .footer-bio {
+      font-size: .8rem;
+      color: var(--gray-light);
+      line-height: 1.7;
+      max-width: 260px;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: .8rem;
+      margin-top: 1.2rem;
+    }
+
+    .social-link {
+      width: 34px; height: 34px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .85rem;
+      text-decoration: none;
+      transition: background .2s, border-color .2s;
+    }
+
+    .social-link:hover {
+      background: rgba(232,0,28,.15);
+      border-color: rgba(232,0,28,.3);
+    }
+
+    .footer-col-title {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+
+    .footer-links a {
+      font-size: .8rem;
+      color: var(--gray-light);
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .footer-links a:hover { color: var(--white); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.06);
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-copy {
+      font-size: .75rem;
+      color: var(--gray-light);
+    }
+
+    .footer-copy span { color: var(--red); }
+
+    .footer-legal {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-legal a {
+      font-size: .7rem;
+      color: var(--gray-light);
+      text-decoration: none;
+    }
+
+    .footer-legal a:hover { color: var(--white); }
+
+    /* ── MOBILE MENU ── */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(10,10,10,.98);
+      z-index: 99;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: .1em;
+      transition: color .2s;
+    }
+
+    .mobile-menu a:hover { color: var(--red); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .collections-grid { grid-template-columns: repeat(2, 1fr); }
+      .collection-card:first-child { grid-row: span 1; aspect-ratio: 3/4; }
+      .ig-grid { grid-template-columns: repeat(3, 1fr); }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-cta-wrap { display: none; }
+      .nav-burger { display: flex; }
+
+      #hero { padding-top: 80px; text-align: center; }
+      .hero-content { max-width: 100%; }
+      .hero-actions { justify-content: center; }
+      .hero-stats { position: static; margin-top: 3rem; justify-content: center; }
+      .hero-scroll { display: none; }
+
+      #nosotros {
+        grid-template-columns: 1fr;
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+      }
+      .about-tag { display: none; }
+
+      .collections-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .collection-card:first-child { aspect-ratio: 3/4; }
+
+      .collections-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+
+      .ig-grid { grid-template-columns: repeat(3, 1fr); }
+
+      .newsletter-form { flex-direction: column; }
+
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+      .footer-legal { justify-content: center; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title { font-size: 4rem; }
+      .ig-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="#" class="nav-logo">SCAR<span>LUX</span></a>
+    <ul class="nav-links">
+      <li><a href="#colecciones">Colecciones</a></li>
+      <li><a href="#drops">Drops</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#instagram">Instagram</a></li>
+      <li><a href="#newsletter" class="nav-cta">Shop Now</a></li>
+    </ul>
+    <div class="nav-burger" id="burger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#colecciones" onclick="toggleMenu()">Colecciones</a>
+    <a href="#drops" onclick="toggleMenu()">Drops</a>
+    <a href="#nosotros" onclick="toggleMenu()">Nosotros</a>
+    <a href="#instagram" onclick="toggleMenu()">Instagram</a>
+    <a href="#newsletter" onclick="toggleMenu()">Shop Now</a>
+  </div>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-noise"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge">Nueva Colección 2026</div>
+      <h1 class="hero-title">
+        <span>STREET</span>
+        <span class="line-red">CULTURE</span>
+        <span>IS ALIVE</span>
+      </h1>
+      <p class="hero-subtitle">
+        Ropa urbana para los que no siguen tendencias — las crean.
+        Calidad premium, estética sin filtros.
+      </p>
+      <div class="hero-actions">
+        <a href="#drops" class="btn-primary">Ver Colección</a>
+        <a href="#nosotros" class="btn-ghost">Nuestra Historia</a>
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-number">5<span>K+</span></div>
+        <div class="stat-label">Seguidores</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">100<span>%</span></div>
+        <div class="stat-label">Original</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">24<span>H</span></div>
+        <div class="stat-label">Envíos</div>
+      </div>
+    </div>
+
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span class="scroll-text">Scroll</span>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <div class="marquee-item">SCARLUX STREET <div class="marquee-dot"></div></div>
+      <div class="marquee-item">URBAN CULTURE <div class="marquee-dot"></div></div>
+      <div class="marquee-item">NUEVOS DROPS <div class="marquee-dot"></div></div>
+      <div class="marquee-item">ENVÍOS 24H <div class="marquee-dot"></div></div>
+      <div class="marquee-item">ROPA PREMIUM <div class="marquee-dot"></div></div>
+      <div class="marquee-item">STREET STYLE <div class="marquee-dot"></div></div>
+      <div class="marquee-item">SCARLUX STREET <div class="marquee-dot"></div></div>
+      <div class="marquee-item">URBAN CULTURE <div class="marquee-dot"></div></div>
+      <div class="marquee-item">NUEVOS DROPS <div class="marquee-dot"></div></div>
+      <div class="marquee-item">ENVÍOS 24H <div class="marquee-dot"></div></div>
+      <div class="marquee-item">ROPA PREMIUM <div class="marquee-dot"></div></div>
+      <div class="marquee-item">STREET STYLE <div class="marquee-dot"></div></div>
+    </div>
+  </div>
+
+  <!-- COLECCIONES -->
+  <section id="colecciones">
+    <div class="collections-header">
+      <div>
+        <div class="section-label">Catálogo</div>
+        <h2 class="section-title">Nuestras<br>Colecciones</h2>
+      </div>
+      <a href="#drops" class="btn-ghost">Ver Todo</a>
+    </div>
+
+    <div class="collections-grid">
+      <!-- Card grande -->
+      <div class="collection-card">
+        <div class="card-placeholder p1">
+          <div class="placeholder-text">
+            <div class="placeholder-icon">🧥</div>
+            <div class="placeholder-label">Outerwear</div>
+          </div>
+        </div>
+        <div class="card-img" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <span class="card-tag">Destacado</span>
+          <h3 class="card-title">Heavy Drop Vol.1</h3>
+          <p class="card-price">Desde $79.99</p>
+        </div>
+      </div>
+
+      <!-- Cards pequeñas -->
+      <div class="collection-card">
+        <div class="card-placeholder p2">
+          <div class="placeholder-text">
+            <div class="placeholder-icon">👕</div>
+            <div class="placeholder-label">Tees</div>
+          </div>
+        </div>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <span class="card-tag">Tees</span>
+          <h3 class="card-title">Graphic Series</h3>
+          <p class="card-price">Desde $34.99</p>
+        </div>
+      </div>
+
+      <div class="collection-card">
+        <div class="card-placeholder p3">
+          <div class="placeholder-text">
+            <div class="placeholder-icon">👖</div>
+            <div class="placeholder-label">Pants</div>
+          </div>
+        </div>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <span class="card-tag">Bottoms</span>
+          <h3 class="card-title">Street Pants</h3>
+          <p class="card-price">Desde $59.99</p>
+        </div>
+      </div>
+
+      <div class="collection-card">
+        <div class="card-placeholder p4">
+          <div class="placeholder-text">
+            <div class="placeholder-icon">🧢</div>
+            <div class="placeholder-label">Accesorios</div>
+          </div>
+        </div>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <span class="card-tag">Accesorios</span>
+          <h3 class="card-title">Caps & More</h3>
+          <p class="card-price">Desde $24.99</p>
+        </div>
+      </div>
+
+      <div class="collection-card">
+        <div class="card-placeholder p5">
+          <div class="placeholder-text">
+            <div class="placeholder-icon">🏁</div>
+            <div class="placeholder-label">Limited</div>
+          </div>
+        </div>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <span class="card-tag">Limited</span>
+          <h3 class="card-title">Edition Especial</h3>
+          <p class="card-price">Desde $89.99</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DROPS -->
+  <section id="drops">
+    <div class="section-label">Lo más nuevo</div>
+    <h2 class="section-title">Últimos Drops</h2>
+    <p class="section-desc">Piezas únicas con stock limitado. Cuando se acaban, se acaban.</p>
+
+    <div class="drops-grid">
+
+      <div class="drop-card">
+        <div class="drop-img">
+          <span class="drop-badge">Nuevo</span>
+          <div class="card-placeholder p1" style="position:absolute;inset:0;width:100%;height:100%;">
+            <div class="placeholder-text"><div class="placeholder-icon">👕</div></div>
+          </div>
+        </div>
+        <div class="drop-info">
+          <div class="drop-name">Scarlux Logo Oversized Tee</div>
+          <div class="drop-category">Camisetas</div>
+          <div class="drop-footer">
+            <span class="drop-price">$39.99</span>
+            <div class="drop-sizes">
+              <span class="size-chip">S</span>
+              <span class="size-chip">M</span>
+              <span class="size-chip">L</span>
+              <span class="size-chip">XL</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="drop-card">
+        <div class="drop-img">
+          <span class="drop-badge limited">Limited</span>
+          <div class="card-placeholder p2" style="position:absolute;inset:0;width:100%;height:100%;">
+            <div class="placeholder-text"><div class="placeholder-icon">🧥</div></div>
+          </div>
+        </div>
+        <div class="drop-info">
+          <div class="drop-name">Tactical Windbreaker Vol.2</div>
+          <div class="drop-category">Outerwear</div>
+          <div class="drop-footer">
+            <span class="drop-price">$119.99</span>
+            <div class="drop-sizes">
+              <span class="size-chip">M</span>
+              <span class="size-chip">L</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="drop-card">
+        <div class="drop-img">
+          <span class="drop-badge">Nuevo</span>
+          <div class="card-placeholder p3" style="position:absolute;inset:0;width:100%;height:100%;">
+            <div class="placeholder-text"><div class="placeholder-icon">👖</div></div>
+          </div>
+        </div>
+        <div class="drop-info">
+          <div class="drop-name">Cargo Street Pants</div>
+          <div class="drop-category">Bottoms</div>
+          <div class="drop-footer">
+            <span class="drop-price">$64.99</span>
+            <div class="drop-sizes">
+              <span class="size-chip">S</span>
+              <span class="size-chip">M</span>
+              <span class="size-chip">L</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="drop-card">
+        <div class="drop-img">
+          <span class="drop-badge sold">Agotado</span>
+          <div class="card-placeholder p4" style="position:absolute;inset:0;width:100%;height:100%;opacity:.5;">
+            <div class="placeholder-text"><div class="placeholder-icon">🧢</div></div>
+          </div>
+        </div>
+        <div class="drop-info">
+          <div class="drop-name">5-Panel SL Logo Cap</div>
+          <div class="drop-category">Accesorios</div>
+          <div class="drop-footer">
+            <span class="drop-price" style="color:var(--gray-light);text-decoration:line-through;">$29.99</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="drop-card">
+        <div class="drop-img">
+          <span class="drop-badge">Nuevo</span>
+          <div class="card-placeholder p5" style="position:absolute;inset:0;width:100%;height:100%;">
+            <div class="placeholder-text"><div class="placeholder-icon">🧣</div></div>
+          </div>
+        </div>
+        <div class="drop-info">
+          <div class="drop-name">Heavyweight Hoodie</div>
+          <div class="drop-category">Hoodies</div>
+          <div class="drop-footer">
+            <span class="drop-price">$79.99</span>
+            <div class="drop-sizes">
+              <span class="size-chip">S</span>
+              <span class="size-chip">M</span>
+              <span class="size-chip">L</span>
+              <span class="size-chip">XL</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="drop-card">
+        <div class="drop-img">
+          <span class="drop-badge limited">Limited</span>
+          <div class="card-placeholder p1" style="background: linear-gradient(145deg,#1a1a1a,#333); position:absolute;inset:0;width:100%;height:100%;">
+            <div class="placeholder-text"><div class="placeholder-icon">🩳</div></div>
+          </div>
+        </div>
+        <div class="drop-info">
+          <div class="drop-name">Scarlux Street Shorts</div>
+          <div class="drop-category">Bottoms</div>
+          <div class="drop-footer">
+            <span class="drop-price">$44.99</span>
+            <div class="drop-sizes">
+              <span class="size-chip">M</span>
+              <span class="size-chip">L</span>
+              <span class="size-chip">XL</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- NOSOTROS -->
+  <section id="nosotros">
+    <div class="about-visual">
+      <div class="about-main-img">
+        <div style="text-align:center;opacity:.2;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:8rem;line-height:1;letter-spacing:.05em;">SL</div>
+          <div style="font-size:.7rem;letter-spacing:.4em;text-transform:uppercase;">Scarlux Street</div>
+        </div>
+      </div>
+      <div class="about-accent"></div>
+      <div class="about-tag">
+        <div class="about-tag-num">2023</div>
+        <div class="about-tag-txt">Fundados</div>
+      </div>
+    </div>
+
+    <div class="about-text">
+      <div class="section-label">Nuestra Historia</div>
+      <h2 class="section-title">Born From<br><span style="color:var(--red);">The Street</span></h2>
+      <p class="section-desc" style="margin-bottom:1rem;">
+        Scarlux Street nació de la calle. No de un showroom, no de una tendencia importada —
+        de barrio, de cultura urbana auténtica, de gente que vive el estilo.
+      </p>
+      <p class="section-desc">
+        Cada pieza que diseñamos lleva esa energía. Sin compromiso con la autenticidad,
+        sin atajos en la calidad.
+      </p>
+
+      <div class="about-values">
+        <div class="value-item">
+          <div class="value-icon">🔥</div>
+          <div>
+            <div class="value-title">100% Original</div>
+            <div class="value-desc">Diseños propios, nunca réplicas. Cada drop es una pieza de identidad.</div>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">⚡</div>
+          <div>
+            <div class="value-title">Calidad Premium</div>
+            <div class="value-desc">Materiales seleccionados. Prendas que duran tanto como tu estilo.</div>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">📦</div>
+          <div>
+            <div class="value-title">Envíos Rápidos</div>
+            <div class="value-desc">Tu pedido sale en 24h. Para que no esperes más de lo necesario.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTAGRAM -->
+  <section id="instagram">
+    <div class="ig-header">
+      <div class="section-label">Síguenos</div>
+      <h2 class="section-title">@scarlux_street</h2>
+      <a href="https://www.instagram.com/scarlux_street" target="_blank" rel="noopener" class="ig-handle">
+        Ver perfil en Instagram →
+      </a>
+    </div>
+
+    <div class="ig-grid">
+      <div class="ig-post">
+        <div class="ig-placeholder ig1" style="width:100%;height:100%;"></div>
+        <div class="ig-hover">📸</div>
+      </div>
+      <div class="ig-post">
+        <div class="ig-placeholder ig2" style="width:100%;height:100%;"></div>
+        <div class="ig-hover">📸</div>
+      </div>
+      <div class="ig-post">
+        <div class="ig-placeholder ig3" style="width:100%;height:100%;"></div>
+        <div class="ig-hover">📸</div>
+      </div>
+      <div class="ig-post">
+        <div class="ig-placeholder ig4" style="width:100%;height:100%;"></div>
+        <div class="ig-hover">📸</div>
+      </div>
+      <div class="ig-post">
+        <div class="ig-placeholder ig5" style="width:100%;height:100%;"></div>
+        <div class="ig-hover">📸</div>
+      </div>
+      <div class="ig-post">
+        <div class="ig-placeholder ig6" style="width:100%;height:100%;"></div>
+        <div class="ig-hover">📸</div>
+      </div>
+    </div>
+
+    <a href="https://www.instagram.com/scarlux_street" target="_blank" rel="noopener" class="btn-ghost">
+      Ver más en Instagram
+    </a>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section id="newsletter">
+    <div class="newsletter-inner">
+      <div class="section-label">Comunidad</div>
+      <h2 class="section-title">Sé el<br><span style="color:var(--red);">Primero</span></h2>
+      <p class="section-desc">
+        Entérate de los nuevos drops antes que nadie. Acceso anticipado, descuentos exclusivos, cultura pura.
+      </p>
+      <form class="newsletter-form" onsubmit="handleSubmit(event)">
+        <input
+          type="email"
+          class="newsletter-input"
+          placeholder="tu@email.com"
+          required
+          id="emailInput"
+        />
+        <button type="submit" class="btn-primary">Suscribirme</button>
+      </form>
+      <p class="newsletter-note">Sin spam. Solo drops, novedades y cultura urbana.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo">SCAR<span style="color:var(--red);">LUX</span></a>
+        <p class="footer-bio">
+          Ropa urbana auténtica. Diseñada para los que viven la cultura de la calle sin pedir permiso.
+        </p>
+        <div class="footer-socials">
+          <a href="https://www.instagram.com/scarlux_street" target="_blank" rel="noopener" class="social-link">📸</a>
+          <a href="#" class="social-link">🎵</a>
+          <a href="#" class="social-link">▶</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Tienda</div>
+        <ul class="footer-links">
+          <li><a href="#colecciones">Colecciones</a></li>
+          <li><a href="#drops">Nuevos Drops</a></li>
+          <li><a href="#drops">Hoodies</a></li>
+          <li><a href="#drops">Camisetas</a></li>
+          <li><a href="#drops">Accesorios</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Ayuda</div>
+        <ul class="footer-links">
+          <li><a href="#">Guía de Tallas</a></li>
+          <li><a href="#">Envíos</a></li>
+          <li><a href="#">Devoluciones</a></li>
+          <li><a href="#">Contacto</a></li>
+          <li><a href="#">FAQs</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Contacto</div>
+        <ul class="footer-links">
+          <li><a href="https://www.instagram.com/scarlux_street" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="#">WhatsApp</a></li>
+          <li><a href="mailto:info@scarluxstreet.com">info@scarluxstreet.com</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 <span>Scarlux Street</span>. Todos los derechos reservados.</p>
+      <div class="footer-legal">
+        <a href="#">Privacidad</a>
+        <a href="#">Términos</a>
+        <a href="#">Cookies</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Mobile menu
+    function toggleMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('open');
+    }
+
+    // Newsletter
+    function handleSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('emailInput');
+      const btn = e.target.querySelector('button');
+      btn.textContent = '¡Listo! 🔥';
+      btn.style.background = '#16a34a';
+      input.value = '';
+      setTimeout(() => {
+        btn.textContent = 'Suscribirme';
+        btn.style.background = '';
+      }, 3000);
+    }
+
+    // Smooth reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.drop-card, .collection-card, .value-item').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(24px)';
+      el.style.transition = 'opacity .5s ease, transform .5s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
